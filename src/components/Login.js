@@ -44,7 +44,7 @@ export default function Login({ setLogin, setAdmin, setLoginStatus }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ phone, password }),
+        body: JSON.stringify({ phone }),
       });
 
       if (response.ok) {
@@ -52,7 +52,7 @@ export default function Login({ setLogin, setAdmin, setLoginStatus }) {
 
         setToken(data.token);
 
-        if (phone === "123" && password === "123") {
+        if (phone === "123") {
           setAdmin(true);
           setLogin(true);
           setLoginStatus("Logout");
@@ -126,22 +126,9 @@ export default function Login({ setLogin, setAdmin, setLoginStatus }) {
                           required
                         />
                       </div>
-                      <div className="mb-3">
-                        <label htmlFor="password" className="form-label">
-                          Password
-                        </label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="password"
-                          placeholder="*******"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                        />
-                      </div>
+                      
                       <div id="recaptcha"></div>
-                      <div className="d-grid">
+                      <div className="d-grid my-3">
                         <button
                           className="btn btn-outline-dark"
                           type="button"

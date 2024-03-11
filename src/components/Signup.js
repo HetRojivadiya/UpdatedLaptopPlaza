@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const [name, setName] = useState('');
-  const [phone, setphone] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState(''); // Added email state
   const [password, setPassword] = useState('');
 
   const nav = useNavigate();
@@ -15,12 +16,12 @@ export default function Signup() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, phone, password }), // Updated to use phone
+        body: JSON.stringify({ name, phone, email, password }), // Updated to include email
       });
 
       if (response.ok) {
         alert('Signup successful');
-        nav("/login");
+        nav('/login');
         // Redirect or perform other actions after successful signup
       } else {
         console.error('Signup failed');
@@ -59,11 +60,24 @@ export default function Signup() {
                       Phone Number
                     </label>
                     <input
-                      type="tel" // Use "tel" type for phone numbers
+                      type="tel"
                       className="form-control"
                       id="phone"
                       value={phone}
-                      onChange={(e) => setphone(e.target.value)}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </div>
